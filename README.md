@@ -6,7 +6,7 @@
 
 Running `theMatrix` using `sbt` results (using fictive data) in
 
-!(https://github.com/PSBP-Library/theMatrix/Output.png)
+!(https://github.com/PSBP-Library/theMatrix/blob/main/Output.png)
 
 ```scala
 sbt:theMatrix> run
