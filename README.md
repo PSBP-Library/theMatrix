@@ -1,6 +1,6 @@
 ## The "matrix" is a simple, text based, "share a bill app"
 
-- Not every payment has to be done with all n persons involved.
+- Not every payment has to be done with all persons involved.
 - Every participant of a payment can contribute to it or not.
 
 
