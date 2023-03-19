@@ -11,4 +11,4 @@ val numberOfDefinedAmounts =
   }(0)(_ + _)
 
 val some: Double => Option[Amount] = z => Some(BigDecimal(z))
-val ____________ : Option[Amount] = None   
+val ____________ : Option[Amount] = None

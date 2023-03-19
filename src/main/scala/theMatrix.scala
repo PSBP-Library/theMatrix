@@ -29,11 +29,5 @@
   println()
   println("\t._______________________________________________________________________________________________________.")
   println()
-  
+
   test(payments)
-
-  // just in case formatting is done by accident (amount of blanks will go to 1)
-
-  // val names =
-  //   List("Luc",        "Maritza",    "Jos",        "Gaby",       "Daan",       "Laura"     )
-
