@@ -1,8 +1,5 @@
 val names =
-List("John",       "Mary",       "Joe",        "Kelly",      "Donald",     "Mick"      )
-
-val some: Double => Option[Amount] = z => Some(BigDecimal(z))
-val ____________ : Option[Amount] = None    
+List("John",       "Mary",       "Joe",        "Kelly",      "Donald",     "Mick"      )   
 
 val payments = List(
 List(some(090.50), some(000.00), some(010.50), some(-01.00), ____________, ____________),

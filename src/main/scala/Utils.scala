@@ -9,3 +9,6 @@ val numberOfDefinedAmounts =
     if (optionalAmount.isDefined) { 1 }
     else { 0 }
   }(0)(_ + _)
+
+val some: Double => Option[Amount] = z => Some(BigDecimal(z))
+val ____________ : Option[Amount] = None   
