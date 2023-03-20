@@ -28,6 +28,6 @@ xxxxxxxx,xxxxxxxx,0030.300,0000.000,0069.700,0000.000
 0000.000,0000.000,0050.000,0150.000,0000.000,0050.000
 ```
 
-When running `theMAtrix` is is advised to remove the blanks again
+When running `theMatrix` is is advised to remove the blanks again
 so that the results are correctly formatted.
 
