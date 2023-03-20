@@ -1,4 +1,4 @@
-val epsilon = 1.1e-30
+val epsilon = BigDecimal(1.1e-30)
 
 val expectedValue = BigDecimal(0.0)
 
