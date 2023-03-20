@@ -9,5 +9,6 @@ lazy val root = project
     scalaVersion := scala3Version,
 
     libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.8"
-
+    
   )
+

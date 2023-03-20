@@ -1,4 +1,26 @@
+import com.github.tototoshi.csv.{CSVReader, defaultCSVFormat}
+
+import CSVReader.open
+
 @main def theMatrix: Unit =
+
+  println("Please enter the name of your csv file")
+
+  val file = new java.io.File(scala.io.StdIn.readLine())
+
+  val names = open(file).all().head
+
+  val payments =  open(file).all().tail.map { paymentRow =>
+    val some: String => Option[Amount] = z => Some(BigDecimal(z))
+    val xxxxxxxx: Option[Amount] = None
+    paymentRow.map { optionalAmountString =>
+      if (optionalAmountString == "xxxxxxxx") {
+        xxxxxxxx
+      } else {
+        some(optionalAmountString)
+      }
+    }
+  }
 
   println(s"${Console.BLACK}")
   println("\t.-------------------------------------------------------------------------------------------------------.")

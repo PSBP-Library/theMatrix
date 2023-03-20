@@ -11,12 +11,23 @@ Running `theMatrix` results in
 
 https://github.com/PSBP-Library/theMatrix/blob/main/Output.png .
 
-To use `theMatrix` yourself replace the fictive data in
+To use `theMatrix` yourself use your own csv file
 
-https://github.com/PSBP-Library/theMatrix/blob/main/names.csv
+similar to 
 
-and
+https://github.com/PSBP-Library/theMatrix/blob/main/payments.csv .
 
-https://github.com/PSBP-Library/theMatrix/blob/main/payments.csv
+When adding payments to the csv it is useful to put blanks between the names
+so that you put the right amount at the right place of a new payment
 
-by your own.
+```
+John    ,Mary    ,Joe     ,Kelly   ,Donald  ,Mick
+0090.500,0000.000,0010.500,-001.000,xxxxxxxx,xxxxxxxx
+xxxxxxxx,xxxxxxxx,0030.300,0000.000,0069.700,0000.000
+0100.000,0000.000,0050.000,0000.000,0150.000,0000.000
+0000.000,0000.000,0050.000,0150.000,0000.000,0050.000
+```
+
+When running `theMAtrix` is is advised to remove the blanks again
+so that the results are correctly formatted.
+
