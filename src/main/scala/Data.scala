@@ -1,9 +1,19 @@
-val names =
-  List("John",       "Mary",       "Joe",        "Kelly",      "Donald",     "Mick"      )
+import com.github.tototoshi.csv.{CSVReader, defaultCSVFormat}
 
-val payments = List(
-  List(some(090.50), some(000.00), some(010.50), some(-01.00), ____________, ____________),
-  List(____________, ____________, some(030.30), some(000.00), some(069.70), some(000.00)),
-  List(some(100.00), some(000.00), some(050.00), some(000.00), some(150.00), some(000.00)),
-  List(some(000.00), some(000.00), some(050.00), some(150.00), some(000.00), some(050.00))
-)
+import CSVReader.open
+
+val names = open(new java.io.File("names.csv")).all().head
+
+val some: String => Option[Amount] = z => Some(BigDecimal(z))
+
+val xxxxxx: Option[Amount] = None
+
+val payments = open(new java.io.File("payments.csv")).all().tail.map { paymentRow =>
+  paymentRow.map { optionalAmountString =>
+    if (optionalAmountString == "xxxxxx") {
+      xxxxxx
+    } else {
+      some(optionalAmountString)
+    }
+  }
+}

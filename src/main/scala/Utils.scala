@@ -1,14 +1,15 @@
-val totalAmount =
-  mapFoldLeft { (optionalAmount: Option[Amount]) =>
-    if (optionalAmount.isDefined) { optionalAmount.get }
-    else { BigDecimal(0.0) }
-  }(BigDecimal(0.0))(_ + _)
+val totalAmount = (optionalAmounts: List[Option[Amount]]) =>
+  optionalAmounts
+    .map { (optionalAmount: Option[Amount]) =>
+      if (optionalAmount.isDefined) { optionalAmount.get }
+      else { BigDecimal(0.0) }
+    }
+    .foldLeft(BigDecimal(0.0))(_ + _)
 
-val numberOfDefinedAmounts =
-  mapFoldLeft { (optionalAmount: Option[Amount]) =>
-    if (optionalAmount.isDefined) { 1 }
-    else { 0 }
-  }(0)(_ + _)
-
-val some: Double => Option[Amount] = z => Some(BigDecimal(z))
-val ____________ : Option[Amount] = None
+val numberOfDefinedAmounts = (optionalAmounts: List[Option[Amount]]) =>
+  optionalAmounts
+    .map { (optionalAmount: Option[Amount]) =>
+      if (optionalAmount.isDefined) { 1 }
+      else { 0 }
+    }
+    .foldLeft(0)(_ + _)

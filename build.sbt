@@ -6,6 +6,8 @@ lazy val root = project
     name := "theMatrix",
     version := "0.1.0-SNAPSHOT",
 
-    scalaVersion := scala3Version
+    scalaVersion := scala3Version,
+
+    libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.8"
 
   )

@@ -1,14 +1,28 @@
 trait AsString[Z]:
   val asString: Z => String
 
+val blueName = (name: Name) => s"${Console.BLUE}${name}${Console.BLACK}"
+
+given nameAsString: AsString[Name] with
+  val asString: Name => String = name => blueName(name)
+
+val blueAmount = (amount: Amount) =>
+  s"${Console.BLUE}${amount.setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}${Console.BLACK}"
+
+val redAmount = (amount: Amount) =>
+  s"${Console.RED}${amount.setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}${Console.BLACK}"
+
+val greenAmount = (amount: Amount) =>
+  s"${Console.GREEN}${amount.setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}${Console.BLACK}"
+
 given amountAsString: AsString[Amount] with
   val asString: Amount => String = amount =>
     if (amount == 0) {
-      s"${Console.BLUE}${amount.setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}${Console.BLACK}"
+      blueAmount(amount)
     } else if (amount < 0) {
-      s"${Console.RED}${(-amount).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}${Console.BLACK}"
+      redAmount(amount)
     } else {
-      s"${Console.GREEN}${amount.setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}${Console.BLACK}"
+      greenAmount(amount)
     }
 
 given optionalAmountAsString: AsString[Option[Amount]] with
