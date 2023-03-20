@@ -12,7 +12,11 @@ Running `theMatrix` results in
 https://github.com/PSBP-Library/theMatrix/blob/main/Output.png
 
 To use theMatrix yourself replace the fictive data in
+
 https://github.com/PSBP-Library/theMatrix/blob/main/names.csv
+
 and
+
 https://github.com/PSBP-Library/theMatrix/blob/main/payments.csv
+
 by your own.
