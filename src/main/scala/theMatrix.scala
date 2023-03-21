@@ -8,12 +8,16 @@ import CSVReader.open
 
   val file = new java.io.File(scala.io.StdIn.readLine())
 
-  val names = open(file).all().head
+  val matrix = open(file).all()
 
-  val payments =  open(file).all().tail.map { paymentRow =>
+  val namesRow = matrix.head.tail
+
+  val infosRow = matrix.map(row => row.head).tail
+
+  val paymentMatrix = matrix.tail.map { paymentRow =>
     val some: String => Option[Amount] = z => Some(BigDecimal(z))
     val xxxxxxxx: Option[Amount] = None
-    paymentRow.map { optionalAmountString =>
+    paymentRow.tail.map { optionalAmountString =>
       if (optionalAmountString == "xxxxxxxx") {
         xxxxxxxx
       } else {
@@ -22,38 +26,63 @@ import CSVReader.open
     }
   }
 
+  val paymentWithInfoMatrix: List[List[Name | Option[Amount]]] = infosRow.zip(paymentMatrix).map(_ :: _)
+
   println(s"${Console.BLACK}")
-  println("\t.-------------------------------------------------------------------------------------------------------.")
-  print("\t|\t")
-  names.foreach { name =>
+  println(
+    "\t\t\t\t\t.-------------------------------------------------------------------------------------------------------."
+  )
+  print("\t\t\t\t\t|\t")
+  namesRow.foreach { name =>
     import nameAsString.asString
     print(s"${asString(name)}\t\t")
   }
   println("|")
-  println("\t.-------------------------------------------------------------------------------------------------------.")
-  payments.foreach { payment =>
-    import optionalAmountAsString.asString
-    print("\t|\t")
-    payment.foreach { optionalAmount => print(s"${asString(optionalAmount)}\t\t") }
+  println(
+    "\t.-------------------------------.-------------------------------------------------------------------------------------------------------."
+  )
+  paymentWithInfoMatrix.map { row =>
+    print("\t| ")
+    row.foreach { entry =>
+      if (entry.isInstanceOf[Name]) {
+        import nameAsString.asString
+        print(s"${asString(entry.asInstanceOf[Name])}\t|\t")
+      } else {
+        import optionalAmountAsString.asString
+        print(s"${asString(entry.asInstanceOf[Option[Amount]])}\t\t")
+      }
+    }
     print("|")
     println()
   }
-  println("\t.-------------------------------------------------------------------------------------------------------.")
-  paymentMatrix(payments).foreach { payment =>
-    import optionalAmountAsString.asString
-    print("\t|\t")
-    payment.foreach { optionalAmount => print(s"${asString(optionalAmount)}\t\t") }
+  println(
+    "\t.-------------------------------.------------------------------------------------------------------........-----------------------------."
+  )
+  makeBalancedPaymentMatrix(paymentMatrix).foreach { paymentRow =>
+    print("\t\t\t\t\t|\t")
+    paymentRow.foreach { optionalAmount =>
+      import optionalAmountAsString.asString
+      print(s"${asString(optionalAmount)}\t\t")
+    }
     print("|")
     println()
   }
-  println("\t|_______________________________________________________________________________________________________|")
-  println("\t.                                                                                                       .")
-  import amountAsString.asString
-  print("\t|\t")
-  finalPersonRow(payments).foreach { amount => print(s"${asString(amount)}\t\t") }
+  println(
+    "\t\t\t\t\t|_______________________________________________________________________________________________________|"
+  )
+  println(
+    "\t\t\t\t\t|                                                                                                       |"
+  )
+  print("\t\t\t\t\t|\t")
+  makeBalancedFinalPersonRow(paymentMatrix).foreach { amount =>
+    import amountAsString.asString
+    print(s"${asString(amount)}\t\t")
+  }
   print("|")
   println()
-  println("\t._______________________________________________________________________________________________________.")
+  println(
+    "\t\t\t\t\t|_______________________________________________________________________________________________________|"
+  )
   println()
 
-  test(payments)
+  test(paymentMatrix)

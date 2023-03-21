@@ -1,6 +1,6 @@
-type Amount = BigDecimal
-
 type Name = String
+
+type Amount = BigDecimal
 
 type Payment = List[Option[Amount]]
 

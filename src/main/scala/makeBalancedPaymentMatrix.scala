@@ -1,6 +1,6 @@
-// paymentMatrix contains amounts paid too little or too much per payment
+// makeBalancedPaymentMatrix(payments) contains, for all payments, amounts paid too little or too much
 
-val paymentMatrix = (payments: Payments) =>
+val makeBalancedPaymentMatrix = (payments: Payments) =>
   payments.map { payment =>
     val total = totalAmount(payment)
     val participants = numberOfDefinedAmounts(payment)
