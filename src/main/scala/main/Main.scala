@@ -2,8 +2,6 @@ package main
 
 import java.io.{File, FileWriter}
 
-import scala.io.{StdIn}
-
 import types.{Row, Column, Matrix}
 
 import reading.{reading}
