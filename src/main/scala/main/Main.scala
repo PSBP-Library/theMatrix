@@ -49,8 +49,8 @@ import writing.{writing}
       separatorMatrix :::
       thePaymentsAndInfoMatrix :::
       separatorMatrix :::
-      theBalancedPaymentsAndInfoMatrix
-      ::: separatorMatrix :::
+      theBalancedPaymentsAndInfoMatrix :::
+      separatorMatrix :::
       theBalancedToBePaidAndInfoMatrix
 
   val theOutputMatrix: Matrix[String] = theMatrix.map { row =>
@@ -60,4 +60,3 @@ import writing.{writing}
   val outputFileWriter = new FileWriter(args(1), true)
 
   writing(outputFileWriter)(theOutputMatrix)
-
