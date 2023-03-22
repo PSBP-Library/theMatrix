@@ -29,7 +29,7 @@ val totalAmount: Row[Payment] => Some[Amount] = paymentRow =>
       .foldLeft(BigDecimal(0.0))(_ + _)
   )
 
-val numberOfDefinedAmounts = (paymentRow: Row[Payment]) =>
+val numberOfPayers: Row[Payment] => Int = paymentRow =>
   paymentRow
     .map { (payment: Payment) =>
       if (payment.isDefined) { 1 }
@@ -40,7 +40,7 @@ val numberOfDefinedAmounts = (paymentRow: Row[Payment]) =>
 val balancedPaymentsMatrix: Matrix[Payment] => Matrix[Payment] = paymentRow =>
   paymentRow.map { payment =>
     val total = totalAmount(payment).get
-    val payers = numberOfDefinedAmounts(payment)
+    val payers = numberOfPayers(payment)
     payment.map { payment =>
       if (payment.isDefined) {
         val amount = payment.get
