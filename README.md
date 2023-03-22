@@ -9,11 +9,13 @@
 
 Running `theMatrix` results with first command line argument `input.csv` 
 
-https://github.com/PSBP-Library/theMatrix/blob/main/Input.png
+https://github.com/PSBP-Library/theMatrix/blob/main/input.csv
 
 and second command line argument `output.csv` (assuming non-existent) creates `output.csv`
 
-https://github.com/PSBP-Library/theMatrix/blob/main/Output.png .
+https://github.com/PSBP-Library/theMatrix/blob/main/output.csv.
+
+
 
 To use `theMatrix` yourself use your own csv files.
 
