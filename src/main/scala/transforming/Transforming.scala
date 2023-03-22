@@ -54,10 +54,6 @@ val balancedPersonsMatrix: Matrix[Payment] => Matrix[Payment] = _.transpose
 val balancedToBePaidRow: Matrix[Payment] => Row[Payment] = balancedPersonsMatrix =>
   balancedPersonsMatrix.map(totalAmount)
 
-val namesAndInfoRow: Matrix[String] => Row[String] = stringMatrix => stringMatrix.head 
+val namesAndInfoRow: Matrix[String] => Row[String] = stringMatrix => stringMatrix.head
 
 val infosColumn: Matrix[String] => Column[String] = stringMatrix => stringMatrix.map(_.last).tail
-
-
-
-

@@ -8,11 +8,8 @@ import types.{Row, Column, Matrix}
 
 import reading.{reading}
 
-import transforming.{Payment}
-
-import writing.{Entry, entryShow}
-
 import transforming.{
+  Payment,
   paymentsMatrix,
   balancedPaymentsMatrix,
   balancedPersonsMatrix,
@@ -20,6 +17,9 @@ import transforming.{
   namesAndInfoRow,
   infosColumn
 }
+import showing.{Entry, entryShow}
+
+import writing.{writing}
 
 @main def main(args: String*): Unit =
   val inputFile = new File(args(0))
@@ -47,13 +47,13 @@ import transforming.{
   val separatorMatrix: Matrix[Entry] = List(theNamesAndInfoRow.map { entry => "" })
 
   val theMatrix: Matrix[Entry] =
-    theNamesAndInfoMatrix ::: 
-      separatorMatrix ::: 
-        thePaymentsAndInfoMatrix ::: 
-          separatorMatrix ::: 
-            theBalancedPaymentsAndInfoMatrix 
-            ::: separatorMatrix :::
-              theBalancedToBePaidAndInfoMatrix
+    theNamesAndInfoMatrix :::
+      separatorMatrix :::
+      thePaymentsAndInfoMatrix :::
+      separatorMatrix :::
+      theBalancedPaymentsAndInfoMatrix
+      ::: separatorMatrix :::
+      theBalancedToBePaidAndInfoMatrix
 
   val theOutputMatrix: Matrix[String] = theMatrix.map { row =>
     row.zipWithIndex.map { indexedEntry => entryShow.asEntry(theLength)(indexedEntry._2, indexedEntry._1) }
@@ -61,10 +61,5 @@ import transforming.{
 
   val outputFileWriter = new FileWriter(args(1), true)
 
-  theOutputMatrix.foreach { row =>
-    row.foreach { entry =>
-      outputFileWriter.write(entry)
-    }
-  }
+  writing(outputFileWriter)(theOutputMatrix)
 
-  outputFileWriter.close()
