@@ -13,7 +13,7 @@ val paymentsMatrix: Matrix[String] => Matrix[Payment] = stringMatrix =>
     val somePayment: String => Payment = z => Some(BigDecimal(z))
     val noPayment: Payment = None
     paymentRow.map { string =>
-      if (string == "        ") {
+      if (string == "") {
         noPayment
       } else {
         somePayment(string)

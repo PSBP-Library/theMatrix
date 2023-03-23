@@ -19,7 +19,7 @@ given paymentShow: Show[Payment] with
     if (payment.isDefined) {
       s"${payment.get.setScale(2, BigDecimal.RoundingMode.HALF_UP)}"
     } else {
-      " "
+      ""
     }
 
 val paymentAsString: Payment => String = paymentShow.asString
