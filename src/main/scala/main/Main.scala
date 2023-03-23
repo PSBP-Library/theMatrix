@@ -15,7 +15,8 @@ import transforming.{
   namesAndInfoRow,
   infosColumn
 }
-import showing.{Entry, entryShow}
+
+import showing.{Entry}
 
 import writing.{writing}
 
@@ -53,10 +54,6 @@ import writing.{writing}
       separatorMatrix :::
       theBalancedToBePaidAndInfoMatrix
 
-  val theOutputMatrix: Matrix[String] = theMatrix.map { row =>
-    row.zipWithIndex.map { indexedEntry => entryShow.asEntry(theLength)(indexedEntry._2, indexedEntry._1) }
-  }
-
   val outputFileWriter = new FileWriter(args(1), true)
 
-  writing(outputFileWriter)(theOutputMatrix)
+  writing(outputFileWriter)(theMatrix)

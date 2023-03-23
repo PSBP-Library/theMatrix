@@ -1,19 +1,11 @@
 package showing
 
-import transforming.{Amount, Payment}
+import types.{Matrix}
 
-type Entry = String | Payment
+import transforming.{Payment}
 
 trait Show[Z]:
   val asString: Z => String
-
-  val asEntry: Int => (Int, Z) => String =
-    i =>
-      (j, z) =>
-        s"${asString(z)}\t${
-            if (j == i - 1) { "\n" }
-            else { "," }
-          }"
 
 given stringShow: Show[String] with
   val asString: String => String = string => string
@@ -26,6 +18,8 @@ given paymentShow: Show[Payment] with
       " "
     }
 
+type Entry = String | Payment
+
 given entryShow: Show[Entry] with
   val asString: Entry => String = entry =>
     if (entry.isInstanceOf[String]) {
@@ -33,3 +27,22 @@ given entryShow: Show[Entry] with
     } else {
       paymentShow.asString(entry.asInstanceOf[Payment])
     }
+
+given theMatrixShow: Show[Matrix[Entry]] with
+  val asString: Matrix[Entry] => String = entryMatrix =>
+    val length: Int = entryMatrix.head.length
+
+    entryMatrix
+      .map { row =>
+        row.zipWithIndex.map { (z, j) =>
+          s"${entryShow.asString(z)}${
+              if (j == length - 1) { "\n" }
+              else { "," }
+            }"
+        }
+      }
+      .map { row =>
+        row.foldLeft("")(_ + _)
+      }
+      .foldLeft("")(_ + _)
+

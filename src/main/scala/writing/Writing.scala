@@ -4,12 +4,11 @@ import java.io.{FileWriter}
 
 import types.{Matrix}
 
-val writing: FileWriter => Matrix[String] => Unit = fileWriter =>
-  outputMatrix =>
-    outputMatrix.foreach { row =>
-      row.foreach { string =>
-        fileWriter.write(string)
-      }
-    }
+import showing.{Entry, theMatrixShow}
+
+val writing: FileWriter => Matrix[Entry] => Unit = fileWriter =>
+  matrix =>
+
+    fileWriter.write(theMatrixShow.asString(matrix))
 
     fileWriter.close()
