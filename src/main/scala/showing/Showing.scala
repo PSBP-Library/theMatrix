@@ -1,6 +1,8 @@
 package showing
 
-import types.{Matrix}
+import types.{Row, Matrix}
+
+import utils.{stringSum}
 
 import transforming.{Payment}
 
@@ -10,6 +12,8 @@ trait Show[Z]:
 given stringShow: Show[String] with
   val asString: String => String = string => string
 
+val stringAsString: String => String = stringShow.asString
+
 given paymentShow: Show[Payment] with
   val asString: Payment => String = payment =>
     if (payment.isDefined) {
@@ -18,31 +22,31 @@ given paymentShow: Show[Payment] with
       " "
     }
 
+val paymentAsString: Payment => String = paymentShow.asString
+
 type Entry = String | Payment
 
 given entryShow: Show[Entry] with
   val asString: Entry => String = entry =>
-    if (entry.isInstanceOf[String]) {
-      stringShow.asString(entry.asInstanceOf[String])
-    } else {
-      paymentShow.asString(entry.asInstanceOf[Payment])
+    entry match {
+      case (string: String)   => stringAsString(string)
+      case (payment: Payment) => paymentAsString(payment)
     }
 
-given theMatrixShow: Show[Matrix[Entry]] with
-  val asString: Matrix[Entry] => String = entryMatrix =>
-    val length: Int = entryMatrix.head.length
+val entryAsString: Entry => String = entryShow.asString
 
-    entryMatrix
-      .map { row =>
-        row.zipWithIndex.map { (z, j) =>
-          s"${entryShow.asString(z)}${
-              if (j == length - 1) { "\n" }
-              else { "," }
-            }"
-        }
-      }
-      .map { row =>
-        row.foldLeft("")(_ + _)
-      }
-      .foldLeft("")(_ + _)
+val rowAsCsv: Row[Entry] => String = entryRow =>
+  val length: Int = entryRow.length
+  stringSum(entryRow.zipWithIndex.map { (z, j) =>
+    s"${entryAsString(z)}${
+        if (j == length - 1) { "\n" }
+        else { "," }
+      }"
+  })
 
+given matrixShow: Show[Matrix[Entry]] with
+  val asString: Matrix[Entry] => String = entryMatrix => stringSum(entryMatrix.map(rowAsCsv))
+
+val matrixAsCsv: Matrix[Entry] => String = matrixShow.asString
+
+// OK

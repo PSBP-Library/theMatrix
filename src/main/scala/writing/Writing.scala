@@ -4,9 +4,11 @@ import java.io.{FileWriter}
 
 import types.{Matrix}
 
-import showing.{Entry, theMatrixShow}
+import showing.{Entry, matrixAsCsv}
 
-val writing: FileWriter => Matrix[Entry] => Unit = fileWriter =>
+val writing: FileWriter => (Matrix[Entry] => Unit) = fileWriter =>
   matrix =>
-    fileWriter.write(theMatrixShow.asString(matrix))
+    fileWriter.write(matrixAsCsv(matrix))
     fileWriter.close()
+
+// OK    

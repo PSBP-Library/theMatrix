@@ -7,7 +7,9 @@ import CSVReader.open
 
 import types.{Matrix}
 
-val reading: File => Unit => Matrix[String] = file =>
+val reading: File => (Unit => Matrix[String]) = file =>
   _ =>
     val matrix = open(file).all()
     matrix
+
+// OK

@@ -57,3 +57,5 @@ import writing.{writing}
   val outputFileWriter = new FileWriter(args(1), true)
 
   writing(outputFileWriter)(theMatrix)
+
+// OK  
