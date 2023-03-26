@@ -25,4 +25,4 @@ The only library dependency is the parser combinator library one
 
 Payment information can consist of any sentence starting with a word, followed
 by alphanumeric words or a date, but, *if* the sentence contains a date, *then*
-that date *must* be of the form `dd-mm-yyy`.
+that date *must* be of the form `dd-mm-yyyy`.
