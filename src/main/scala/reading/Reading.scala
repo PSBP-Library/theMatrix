@@ -1,15 +1,14 @@
 package reading
 
-import java.io.{File}
-
-import com.github.tototoshi.csv.{CSVReader, defaultCSVFormat}
-import CSVReader.open
+import java.nio.file.{Files, Paths}
 
 import types.{Matrix}
 
-val reading: File => (Unit => Matrix[String]) = file =>
-  _ =>
-    val matrix = open(file).all()
-    matrix
+import fromCsv.{csvToMatrix}
+
+val reading: String => (Unit => Matrix[String]) = filePath =>
+  case () =>
+    val path = Paths.get(filePath)
+    csvToMatrix(new String(Files.readAllBytes(path)))
 
 // OK

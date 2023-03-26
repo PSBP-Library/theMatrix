@@ -17,4 +17,12 @@ https://github.com/PSBP-Library/theMatrix/blob/main/output.csv
 
 (assuming `output.csv` does not exist).
 
-<!-- Done -- >
+The only library dependency is the parser combinator library one
+
+ - `"org.scala-lang.modules" %% "scala-parser-combinators" % "2.2.0"`
+
+**Limitation**
+
+Payment information can consist of any sentence starting with a word, followed
+by alphanumeric words or a data, but, *if* the sentence contains a date, *then*
+that date *must* be of the form `dd-mm-yyy`.

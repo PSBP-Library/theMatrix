@@ -2,13 +2,15 @@ package writing
 
 import java.io.{FileWriter}
 
-import types.{Matrix}
+import types.{Matrix, Entry}
 
-import showing.{Entry, matrixAsCsv}
+import toCsv.{matrixToCsv}
 
-val writing: FileWriter => (Matrix[Entry] => Unit) = fileWriter =>
+val writing: String => (Matrix[Entry] => Unit) = fileWriterPath =>
   matrix =>
-    fileWriter.write(matrixAsCsv(matrix))
-    fileWriter.close()
+    val outputFileWriter = new FileWriter(fileWriterPath, true)
+    outputFileWriter.write(matrixToCsv(matrix))
+    outputFileWriter.close()
+    ()
 
-// OK    
+// OK

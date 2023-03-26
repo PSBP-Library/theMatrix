@@ -1,6 +1,5 @@
 val scala3Version = "3.2.2"
 
-
 lazy val root = project
   .in(file("."))
   .settings(
@@ -9,7 +8,6 @@ lazy val root = project
 
     scalaVersion := scala3Version,
 
-    libraryDependencies += "com.github.tototoshi" %% "scala-csv" % "1.3.8"
-    
+    libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "2.2.0"    
   )
 

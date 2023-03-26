@@ -1,13 +1,12 @@
 package main
 
-import java.io.{File, FileWriter}
+import java.io.{FileWriter}
 
-import types.{Row, Column, Matrix}
+import types.{Row, Column, Matrix, Payment, Entry}
 
 import reading.{reading}
 
 import transforming.{
-  Payment,
   paymentsMatrix,
   balancedPaymentsMatrix,
   balancedPersonsMatrix,
@@ -16,14 +15,12 @@ import transforming.{
   infosColumn
 }
 
-import showing.{Entry}
-
 import writing.{writing}
 
 @main def main(args: String*): Unit =
-  val inputFile = new File(args(0))
+  val inputFilePath = args(0)
 
-  val theInputMatrix: Matrix[String] = reading(inputFile)(())
+  val theInputMatrix: Matrix[String] = reading(inputFilePath)(())
 
   val theLength: Int = theInputMatrix.head.length
 
@@ -45,7 +42,7 @@ import writing.{writing}
 
   val separatorMatrix: Matrix[Entry] = List(theNamesAndInfoRow.map { entry => "" })
 
-  val theMatrix: Matrix[Entry] =
+  val theOutputMatrix: Matrix[Entry] =
     theNamesAndInfoMatrix :::
       separatorMatrix :::
       thePaymentsAndInfoMatrix :::
@@ -54,8 +51,8 @@ import writing.{writing}
       separatorMatrix :::
       theBalancedToBePaidAndInfoMatrix
 
-  val outputFileWriter = new FileWriter(args(1), true)
+  val outputFileWriterPath = args(1)    
 
-  writing(outputFileWriter)(theMatrix)
+  writing(outputFileWriterPath)(theOutputMatrix)
 
 // OK  
